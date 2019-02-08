@@ -27,8 +27,6 @@ function pre_submission_handler( $form ) {
         // Capitalise first name
         $_POST['input_1_3'] = capitalise_string($_POST['input_1_3']);
 
-        // Capitalise last name
-        $_POST['input_1_6'] = capitalise_string($_POST['input_1_6']);
 }
     
 function capitalise_string($string_to_capitalise) {
