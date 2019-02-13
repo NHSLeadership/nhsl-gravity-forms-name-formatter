@@ -38,7 +38,7 @@ function pre_submission_handler( $form ) {
 function capitalise_string( $string_to_capitalise ) {
 
     // Capitalise the passed in string
-    $capitalised_string = str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($string_to_capitalise))));
+    $capitalised_string = ucfirst(strtolower($string_to_capitalise));
 
     // Return the newly capitalised string
     return $capitalised_string;
