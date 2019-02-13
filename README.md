@@ -1,2 +1,2 @@
 # nhsl-gravity-forms-name-formatter
-Formats the the first and last names of the person filling out a form to upper case first letter and lower case everything else
+Formats the the first name of the person filling out a form to upper case first letter and lower case everything else and stores this in the database after the form has been submitted
