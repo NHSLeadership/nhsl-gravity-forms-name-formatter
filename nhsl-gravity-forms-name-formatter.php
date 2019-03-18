@@ -29,9 +29,6 @@ Author:       John Applin
 // Add a filter to apply validation
 add_filter( 'gform_field_validation', 'validate_name_fields' , 10, 4);
 
-// Add the action just before the form data is saved in the database
-add_action( 'gform_pre_submission', 'pre_submission_handler' );
-
 // Perform the validation of the name fields
 function validate_name_fields( $result, $value, $form, $field ) {
         
@@ -47,25 +44,25 @@ function validate_name_fields( $result, $value, $form, $field ) {
 
 				// Set the result array
 				$result['is_valid'] = false;
-				$result['message']  = $result['message'] . 'It looks like you have entered invalid characters for your First Name. Use only letters, hyphens, and apostrophes.<br />';
+				$result['message']  = $result['message'] . 'Your First Name doesn\'t look quite right. Your name should start with a capital letter followed by lower case letters and only contain letters, hyphens, and apostrophes.<br />';
 
 			} // End of If - First Name validation
 
 		// If the middle name is not empty and not hidden then validate the input
-		if ( ! empty( $first ) && ! $field->get_input_property( '4', 'isHidden' ) && ! validate_string( $middle ) ) {
+		if ( ! empty( $middle ) && ! $field->get_input_property( '4', 'isHidden' ) && ! validate_string( $middle ) ) {
 
 				// Set the result array
 				$result['is_valid'] = false;
-				$result['message']  = $result['message'] . 'It looks like you have entered invalid characters for your Middle Name. Use only letters, hyphens, and apostrophes.<br />';
+				$result['message']  = $result['message'] . 'Your Middle Name doesn\'t look quite right. Your name should start with a capital letter followed by lower case letters and only conrain letters, hyphens, and apostrophes.<br />';
 
 			} // End of If - Middle Name validation
 
 		// If the last name is not empty and not hidden then validate the input
-		if ( ! empty( $first ) && ! $field->get_input_property( '6', 'isHidden' ) && ! validate_string( $last ) ) {
+		if ( ! empty( $last ) && ! $field->get_input_property( '6', 'isHidden' ) && ! validate_string( $last ) ) {
 
 				// Set the result array
 				$result['is_valid'] = false;
-				$result['message']  = $result['message'] . 'It looks like you have entered invalid characters for your Last Name. Use only letters, hyphens, and apostrophes.<br />';
+				$result['message']  = $result['message'] . 'Your Last Name doesn\'t look quite right. Your name should start with a capital letter followed by lower case letters and only conrain letters, hyphens, and apostrophes.<br />';
 
 			} // End of If - Last Name validation
 		            
@@ -77,35 +74,27 @@ function validate_name_fields( $result, $value, $form, $field ) {
 } // End of validate_name_fields()
 
 
-// Perform the first name formatting
-function pre_submission_handler( $form ) {
-        
-    // Capitalise the first name
-    $_POST['input_1_3'] = capitalise_string( $_POST['input_1_3'] );
-
-} // End of pre_submission_handler()
-
-
-// Function to apply camel case to a string
-function capitalise_string( $string_to_capitalise ) {
-
-    // Capitalise the passed in string
-    $capitalised_string = ucfirst(strtolower($string_to_capitalise));
-
-    // Return the newly capitalised string
-    return $capitalised_string;
-
-} // End of capitalise_string()
-
-
 // Function to validate a string against a regex pattern
 function validate_string( $string_to_validate ){
+
+	// First we need to count how many letters have been entered.
+	$string_length = strlen($string_to_validate);
+
+	// Next we need to check how many capital letters are in the string
+	$no_of_caps = strlen(preg_replace('/[^A-Z]+/', '', $string_to_validate));
+
+	// Get the percentage of caps in the string
+	$percentage_of_caps = ($no_of_caps/$string_length)*100;
+
+	// Next check the string starts with a capital letter if not return false
+	$first_letter_cap = preg_match("/[A-Z]/", substr($string_to_validate,0,1));
 
 	// Regex pattern to test against (allows upper and lower case letters along with hyphens and apostrophes)
 	$pattern = "/^[\s\da-zA-Z\'-]*$/";
 
-	// Test the passed in string against the regex pattern
-	if (preg_match($pattern, $string_to_validate)) {
+	// Test the passed in string against the regex pattern, check if the percentage of upper case letters is less than 50%,
+	// and check the first letter is uppercase
+	if (preg_match($pattern, $string_to_validate) && $percentage_of_caps < 50 && $first_letter_cap) {
 		
 		// If string contains valid characters return true   		
 		return true;
