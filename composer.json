@@ -1,0 +1,12 @@
+{
+    "name": "nhsleadership/nhsl-gravity-forms-name-formatter",
+    "version": "1.0.1",
+    "dist": {
+        "url": "https://github.com/nhsleadership/nhsl-gravity-forms-name-formatter/archive/master.zip",
+        "type": "zip"
+   },
+   "type": "wordpress-plugin",
+   "require": {
+     "composer/installers": "^1.3"
+   }
+}
