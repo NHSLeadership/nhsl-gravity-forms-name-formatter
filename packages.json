@@ -1,11 +1,10 @@
 {
-    "name": "nhsl-gravity-forms-name-formatter",
-    "version": "1.0.1",
     "packages": {
         "nhsleadership/nhsl-gravity-forms-name-formatter": {
-            "dev-master": { @composer.json },
-            "1.0.x-dev": { @composer.json },
-            "1.0.1": { @composer.json }
+            "dev-master": { @composer.json },            
+            "v1.0.x-dev": { @composer.json },
+            "v1.0.1": { @composer.json },
+            "v1.0.2": { @composer.json }
         }
     }
 }

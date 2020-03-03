@@ -1,12 +1,13 @@
 {
-    "name": "nhsleadership/nhsl-gravity-forms-name-formatter",
-    "version": "1.0.1",
-    "dist": {
-        "url": "https://github.com/nhsleadership/nhsl-gravity-forms-name-formatter/archive/master.zip",
-        "type": "zip"
-   },
-   "type": "wordpress-plugin",
-   "require": {
-     "composer/installers": "^1.3"
-   }
+  "name": "nhsleadership/nhsl-gravity-forms-name-formatter",
+  "description": "Formats the first name of the person filling out a form to upper case first letter and lower case everything else and stores this in the database after the form has been submitted.",
+  "version": "1.0.2",
+  "type": "wordpress-plugin",
+  "require": {
+    "composer/installers": "^1.4"
+  },
+  "license": [
+    "MIT",
+    "OGL-UK-3.0"
+  ]
 }
